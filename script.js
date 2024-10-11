@@ -6,41 +6,42 @@ const sendButton = document.getElementById('send-button');
 const messageInput = document.getElementById('message-input');
 const outputDiv = document.getElementById('output');
 
+var sliderServo = document.getElementById("myRange");
+var sliderInfo = document.getElementById("sliderinfo");
+
 let socket = null;
 
 menuToggle.addEventListener('click', () => {
   headernav.classList.toggle('active');
-  menuToggle.classList.toggle('active'); // Ajoute la classe active pour l'animation
+  menuToggle.classList.toggle('active');
 });
 
 document.getElementById('login-form').addEventListener('submit', function(event) {
-  event.preventDefault(); // Empêche le rechargement de la page
+  event.preventDefault();
   const username = document.getElementById('username').value;
   const password = document.getElementById('password').value;
 
-  // Simulation d'une connexion réussie (tu peux personnaliser cette condition)
   if (username === "user" && password === "pass") {
-      document.getElementById('output').innerText = 'Connexion réussie !'; // Afficher le message de succès
-      document.getElementById('message-form').style.display = 'block'; // Afficher le formulaire de message
-      document.getElementById('login-form').style.display = 'none'; // Masquer le formulaire de connexion
+      document.getElementById('output').innerText = 'Connexion réussie !';
+      document.getElementById('message-form').style.display = 'block';
+      document.getElementById('login-form').style.display = 'none';
       
   } else {
-      document.getElementById('output').innerText = 'Erreur de connexion : identifiants invalides.'; // Afficher les erreurs
+      document.getElementById('output').innerText = 'Erreur de connexion : identifiants invalides.';
   }
 });
 
 document.getElementById('message-form').addEventListener('submit', function(event) {
-  event.preventDefault(); // Empêche le rechargement de la page
+  event.preventDefault();
   const message = document.getElementById('message-input').value;
 
-  // Simuler l'envoi de message et l'afficher
-  document.getElementById('output').innerText = 'Message envoyé : ' + message; // Afficher le message de succès
-  document.getElementById('message-input').value = ''; // Réinitialiser le champ de message
+  document.getElementById('output').innerText = 'Message envoyé : ' + message;
+  document.getElementById('message-input').value = '';
 });
 
 
 connectButton.addEventListener('click', () => {
-  const domainName = '...'; // Remplacez par votre domaine ou votre service DDNS
+  const domainName = 'XX'; // A remplacer par l'IP serveur
   socket = new WebSocket(`ws://${domainName}`);
 
   socket.onopen = () => {
@@ -67,5 +68,12 @@ connectButton.addEventListener('click', () => {
 sendButton.addEventListener('click', () => {
   const message = messageInput.value;
   socket.send(message);
+  messageInput.value = '';
+});
+
+sliderServo.addEventListener('click', () => {
+  const message = sliderServo.value;
+  sliderInfo.textContent = message;
+  socket.send("SERVO:" + message);
   messageInput.value = '';
 });

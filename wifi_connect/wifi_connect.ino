@@ -13,8 +13,8 @@
 #define PIN_SG90 8
 
 // Matrice des boutons
-const int ROW_PINS[] = {7, 8, 1};  // Lignes
-const int COL_PINS[] = {20, 10, 0};  // Colonnes
+const int ROW_PINS[] = {7, 8, 1};
+const int COL_PINS[] = {20, 10, 0};
 
 const char* ssid = "NAME";
 const char* password = "PASS";
@@ -23,15 +23,15 @@ WebSocketsServer webSocket(80);
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
 uint32_t selectedAngle = 180;
-int selectedOption = 0; // Option sélectionnée
-unsigned long lastDebounceTime = 0; // Pour la gestion du debounce
-const unsigned long debounceDelay = 200; // Délai pour le debounce
+int selectedOption = 0;
+unsigned long lastDebounceTime = 0;
+const unsigned long debounceDelay = 200;
 
 Servo sg90;
-int servoPosition = 0;  // Position actuelle du servo
-int servoStep = 1;      // Incrément de la rotation du servo
-unsigned long lastServoMove = 0;  // Pour le contrôle du timing du servo
-const unsigned long servoMoveDelay = 20;  // Délai entre chaque mouvement du servo
+int servoPosition = 0;
+int servoStep = 1;
+unsigned long lastServoMove = 0;
+const unsigned long servoMoveDelay = 20;
 
 void setup() {
   Serial.begin(115200);
@@ -57,14 +57,14 @@ void setup() {
   setupButtonMatrix();
 
   // Initialisation du servomoteur
-  sg90.setPeriodHertz(50); // Fréquence PWM pour le SG90
-  sg90.attach(PIN_SG90, 500, 2400); // Largeur d'impulsion min et max (µs) pour 0° à 180°
+  sg90.setPeriodHertz(50);
+  sg90.attach(PIN_SG90, 500, 2400);
 }
 
 void loop() {
   webSocket.loop();
   handleButtonPress();
-  moveServo();  // Contrôler le servo sans bloquer le programme
+  moveServo();
 }
 
 // Fonction pour gérer la connexion WiFi
@@ -100,37 +100,37 @@ void onWebSocketEvent(uint8_t num, WStype_t type, uint8_t* payload, size_t lengt
 void setupButtonMatrix() {
   for (int row = 0; row < 3; row++) {
     pinMode(ROW_PINS[row], OUTPUT);
-    digitalWrite(ROW_PINS[row], HIGH); // Initialise les lignes à HIGH
+    digitalWrite(ROW_PINS[row], HIGH);
   }
   
   for (int col = 0; col < 3; col++) {
-    pinMode(COL_PINS[col], INPUT_PULLUP); // Résistance de pull-up pour les colonnes
+    pinMode(COL_PINS[col], INPUT_PULLUP);
   }
 }
 
 // Gestion de la pression des boutons avec debounce
 void handleButtonPress() {
   for (int row = 0; row < 3; row++) {
-    digitalWrite(ROW_PINS[row], LOW); // Active la ligne actuelle
+    digitalWrite(ROW_PINS[row], LOW);
 
     for (int col = 0; col < 3; col++) {
       if (digitalRead(COL_PINS[col]) == LOW && (millis() - lastDebounceTime) > debounceDelay) {
-        lastDebounceTime = millis(); // Mettre à jour le temps pour le debounce
+        lastDebounceTime = millis();
         processButtonPress(row, col);
       }
     }
     
-    digitalWrite(ROW_PINS[row], HIGH); // Désactive la ligne actuelle
+    digitalWrite(ROW_PINS[row], HIGH);
   }
 }
 
 // Traitement des pressions de boutons en fonction de la position
 void processButtonPress(int row, int col) {
-  if (row == 0 && col == 0) {  // Bouton "Up"
+  if (row == 0 && col == 0) {
     selectedOption = (selectedOption + 1) % 3;
-  } else if (row == 2 && col == 0) {  // Bouton "Down"
+  } else if (row == 2 && col == 0) {
     selectedOption = (selectedOption + 2) % 3;
-  } else if (row == 0 && col == 2) {  // Bouton "A" pour valider
+  } else if (row == 0 && col == 2) {
     if (selectedOption == 0) {
       webSocket.broadcastTXT("Satisfaction: Yes");
     } else if (selectedOption == 1) {
@@ -147,15 +147,15 @@ void moveServo() {
   
   // Vérifiez si le délai entre les mouvements du servo est écoulé
   if (currentMillis - lastServoMove >= servoMoveDelay) {
-    lastServoMove = currentMillis;  // Mettre à jour le dernier mouvement
+    lastServoMove = currentMillis;
     
     // Ajuster la position du servo
     sg90.write(servoPosition);
-    servoPosition += servoStep;  // Incrément ou décrément
+    servoPosition += servoStep;
     
     // Inverser la direction du mouvement si les limites sont atteintes
     if (servoPosition >= selectedAngle || servoPosition <= 0) {
-      servoStep = -servoStep;  // Inverser la direction
+      servoStep = -servoStep;
     }
   }
 }

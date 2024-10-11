@@ -42,7 +42,7 @@
         <section class="hero">
             <div class="container">
                 <h2>WebSocket Client</h2>
-                <p>bidirectional communication between client and server</p>
+                <p>Bidirectional communication between client and server</p>
                 <p>Type your message or enter an angle using SERVO:XXX (XXX must be between 90 and 180!)</p>
                 <!--<a href="#" class="btn btn-fab"><span>+</span></a>-->
             </div>
@@ -68,8 +68,14 @@
                             <textarea id="message-input" name="message" rows="4" cols="50" required></textarea><br><br>
         
                             <button type="submit" id="send-button">Send message</button>
-                        </form>
-        
+                                              
+                            <div class="slidecontainer">
+                                <p>Or use the slider to control the angle of rotation:</p>
+                                <input type="range" min="91" max="179" value="180" class="slider" id="myRange">
+                                <p id="sliderinfo">180</p>
+                            </div>
+                         </form>
+
                         <div id="output"></div>
                     </div>
                 </div>
