@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Site Web Material Design</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <script>
+        .jetbrains-mono-<uniquifier> {
+        font-family: "JetBrains Mono", monospace;
+        font-optical-sizing: auto;
+        font-weight: <weight>;
+        font-style: normal;}
+    </script>
+</head>
+
+<body>
+    <header>
+        <!--<h1>Arthur Deroo</h1>-->
+        <div class="menu-toggle" id="mobile-menu">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Accueil</a></li> <!--https://techartdr.github.io/IFT-Documentation/-->
+                <li><a href="#">À propos</a></li>
+                <li><a href="#">Projets</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h2>WebSocket Client</h2>
+                <p>bidirectional communication between client and server</p>
+                <p>Type your message or enter an angle using SERVO:XXX (XXX must be between 90 and 180!)</p>
+                <!--<a href="#" class="btn btn-fab"><span>+</span></a>-->
+            </div>
+        </section>
+
+        <section class="content">
+            <div class="container">
+                <div class="card">
+                    <div class="content-interact">
+                        <form id="login-form">
+                            <label for="username">User :</label>
+                            <input type="text" id="username" name="username" required><br><br>
+        
+                            <label for="password">Password :</label>
+                            <input type="password" id="password" name="password" required><br><br>
+        
+                            <button type="submit" id="connect-button">Connexion</button>
+                        </form>
+        
+                        <!-- Le deuxième formulaire est caché par défaut -->
+                        <form id="message-form" style="display: none;">
+                            <label for="message">Message :</label><br>
+                            <textarea id="message-input" name="message" rows="4" cols="50" required></textarea><br><br>
+        
+                            <button type="submit" id="send-button">Send message</button>
+                        </form>
+        
+                        <div id="output"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Deroo Arthur - Portfolio 2024</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
+
+<!--<button id="connect-button">Se connecter</button>
+    <button id="send-button">Envoyer un message</button>
+    <input id="message-input" type="text" placeholder="Entrez un message">
+    <div id="output"></div>-->

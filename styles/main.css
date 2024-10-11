@@ -1,0 +1,323 @@
+/* Styles généraux */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: all 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
+    /* Timing Material Design */
+}
+
+body {
+    font-family: 'JetBrains Mono', sans-serif;
+    background-color: #0B0B0B;
+    color: #0E0E0E;
+    line-height: 1.6;
+}
+
+/* Conteneur centralisé */
+.container {
+    width: 70%;
+    margin: 0 auto;
+    transition: width 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+/* Styles du header et footer */
+header,
+footer {
+    background-color: #282828;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 1.5rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: padding 0.5s ease-in-out;
+}
+
+footer {
+    margin-top: 20px;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Styles du header */
+header h1 {
+    float: left;
+    font-weight: 200;
+    font-size: 2.6rem;
+}
+
+header nav {
+    position: relative;
+}
+
+.menu-toggle {
+    display: none;
+    /* Cacher le menu hamburger par défaut */
+    flex-direction: column;
+    cursor: pointer;
+    margin-right: 20px;
+    /* Ajuste selon le besoin */
+    margin-left: 20px;
+    /* Ajuste selon le besoin */
+    padding: 10px;
+    /* Ajout d'un padding pour améliorer la zone de clic */
+    background-color: transparent;
+    /* Pas de fond */
+    border-radius: 4px;
+    /* Coins arrondis */
+    transition: background-color 0.3s ease;
+    /* Transition douce pour le fond */
+}
+
+.menu-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    /* Effet au survol pour le hamburger */
+}
+
+/* Styles des barres du menu */
+.menu-toggle .bar {
+    height: 3px;
+    width: 30px;
+    background-color: #FFFFFF;
+    /* Couleur des barres */
+    margin: 4px 0;
+    transition: all 0.3s ease;
+    /* Transition pour les animations */
+}
+
+/* Animation pour transformer le menu hamburger en "X" */
+.menu-toggle.active .bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+    /* Rotation de la première barre */
+}
+
+.menu-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+    /* Cacher la barre du milieu */
+}
+
+.menu-toggle.active .bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+    /* Rotation de la troisième barre */
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Styles pour les éléments du menu */
+header nav ul li {
+    display: inline-block;
+    /* Affichage en ligne */
+    margin-left: 20px;
+    /* Marge entre les éléments */
+    transition: transform 0.3s ease;
+    /* Transition pour l'animation */
+}
+
+/* Styles des liens du menu */
+header nav ul li a {
+    color: #A52A2A;
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 10px;
+    /* Ajout de padding pour une zone de clic plus grande */
+    border-radius: 4px;
+    /* Coins arrondis */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    /* Transitions */
+}
+
+/* Effet au survol des liens du menu */
+header nav ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    /* Fond au survol */
+    color: #B22222;
+    /* Changement de couleur au survol */
+}
+
+/* Section Hero */
+.hero {
+    background-color: #2B1B1B;
+    color: #FFFFFF;
+    padding: 50px 0;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.hero h2 {
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+}
+
+.hero p {
+    margin-bottom: 30px;
+    font-size: 1.2rem;
+}
+
+.hero .btn-fab {
+    display: inline-block;
+    background-color: #6200ea;
+    color: #fff;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 56px;
+    font-size: 24px;
+    text-decoration: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.5s ease-in-out, transform 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.hero .btn-fab:hover {
+    background-color: #3700b3;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+    transform: translateY(-5px) scale(1.1);
+}
+
+/* Contenu principal avec les cartes */
+.content {
+    padding: 20px 0;
+    text-align: center;
+}
+
+.content h3 {
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+.card {
+    background-color: #FFFFFF;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 10px auto;
+    transition: box-shadow 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+/*.card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    transform: translateY(-5px) translateZ(10px) scale(1.05);
+}*/
+
+.card p {
+    font-size: 1.1rem;
+    color: #616161;
+    margin: 10px 0;
+}
+
+.card button {
+    background-color: #A52A2A;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.card button:hover {
+    background-color: #8B0000;
+}
+
+.card input,
+.card textarea {
+    border: 2px solid #B22222;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    outline: none;
+    width: 100%;
+    transition: border-color 0.3s ease;
+    margin: 10px 0;
+}
+
+/* Media queries pour rendre le site responsive */
+@media screen and (max-width: 768px) {
+    .card {
+        padding: 15px;
+    }
+
+    .card p {
+        font-size: 1rem;
+    }
+
+    .card button {
+        padding: 12px 24px;
+        font-size: 14px;
+    }
+
+    .card input,
+    .card textarea {
+        font-size: 14px;
+    }
+
+    header h1,
+    header nav {
+        float: none;
+        text-align: center;
+    }
+
+    header nav ul {
+        display: none;
+        /* Cacher le menu par défaut */
+        flex-direction: column;
+        /* Disposition en colonne */
+        position: absolute;
+        /* Positionnement absolu pour le menu */
+        top: 60px;
+        /* Ajuste selon la hauteur de l'en-tête */
+        left: 0;
+        right: 0;
+        background-color: #282828;
+        /* Fond du menu */
+        padding: 20px 0;
+        /* Padding du menu */
+        z-index: 10;
+        /* Pour s'assurer qu'il est au-dessus d'autres éléments */
+    }
+
+    header nav.active ul {
+        display: flex;
+        /* Afficher le menu quand actif */
+    }
+
+    header nav ul li {
+        display: block;
+        /* Affichage en bloc pour les éléments */
+        margin: 10px 0;
+        /* Marge entre les éléments */
+    }
+
+    .content h3 {
+        font-size: 1.5rem;
+    }
+
+    .menu-toggle {
+        display: flex;
+        /* Afficher le menu hamburger */
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h2 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .btn-fab {
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+        line-height: 48px;
+    }
+}
